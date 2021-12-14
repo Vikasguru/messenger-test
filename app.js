@@ -115,7 +115,7 @@ function handleMessage(senderPsid, receivedMessage) {
         response = {
             'text': `You sent the message: '${receivedMessage.text}'. Now send me an attachment!`
         };
-        callSendAPI(senderPsid, response);
+        
     }
     //  else if (receivedMessage.attachments) {
 
@@ -189,9 +189,9 @@ function callSendAPI(senderPsid, response) {
         'qs': { 'access_token': PAGE_ACCESS_TOKEN },
         'method': 'POST',
         'json': requestBody
-    }, (err, _res, _body) => {
+    }, (err, res, body) => {
         if (!err) {
-            console.log('Message sent!',senderPsid);
+            console.log('Message sent!');
         } else {
             console.error('Unable to send message:' + err);
         }
