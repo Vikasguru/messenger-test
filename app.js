@@ -115,6 +115,7 @@ function handleMessage(senderPsid, receivedMessage) {
         response = {
             'text': `You sent the message: '${receivedMessage.text}'. Now send me an attachment!`
         };
+        callSendAPI(senderPsid, response);
     } else if (receivedMessage.attachments) {
 
         // Get the URL of the message attachment
@@ -144,10 +145,11 @@ function handleMessage(senderPsid, receivedMessage) {
                 }
             }
         };
+        callSendAPI(senderPsid, response);
     }
 
     // Send the response message
-    callSendAPI(senderPsid, response);
+    
 }
 
 // Handles messaging_postbacks events
@@ -189,7 +191,7 @@ function callSendAPI(senderPsid, response) {
         'json': requestBody
     }, (err, _res, _body) => {
         if (!err) {
-            console.log('Message sent!');
+            console.log('Message sent!',senderPsid);
         } else {
             console.error('Unable to send message:' + err);
         }
